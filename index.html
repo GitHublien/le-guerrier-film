@@ -1,0 +1,1120 @@
+<title>Tourner Le Guerrier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+:root{
+  --encre:#13151a;
+  --bois:#211c19;
+  --bois-clair:#2c2521;
+  --or:#d9a44c;
+  --or-sourd:#8a6b32;
+  --eau:#5d9ba3;
+  --craie:#ece5da;
+  --cendre:#9a9289;
+  --sang:#bf5444;
+  --trait:#39312c;
+
+  --t-xs:.78rem; --t-s:.9rem; --t-m:1.02rem; --t-l:1.3rem; --t-xl:1.9rem; --t-xxl:2.6rem;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --sans:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Consolas,monospace;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--encre);
+  color:var(--craie);
+  font-family:var(--sans);
+  font-size:var(--t-m);
+  line-height:1.6;
+  padding-bottom:5.5rem;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.035;
+  background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);
+  background-size:3px 3px;
+}
+main{position:relative;z-index:1}
+
+/* ---------- entête ---------- */
+.ouverture{
+  padding:2.6rem 1.25rem 2rem;
+  max-width:46rem;margin:0 auto;
+  border-bottom:1px solid var(--trait);
+}
+.surtitre{
+  font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--or-sourd);margin:0 0 .9rem;
+}
+.ouverture h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2.6rem,12vw,4.2rem);line-height:.95;
+  margin:0 0 .5rem;color:var(--craie);text-wrap:balance;
+}
+.ouverture h1 em{font-style:italic;color:var(--or)}
+.chapo{
+  color:var(--cendre);margin:1rem 0 0;max-width:34rem;
+}
+.fiche{
+  display:flex;flex-wrap:wrap;gap:.4rem .5rem;margin-top:1.4rem;
+}
+.fiche span{
+  font-family:var(--mono);font-size:var(--t-xs);
+  border:1px solid var(--trait);border-radius:2px;
+  padding:.3rem .55rem;color:var(--cendre);
+}
+
+/* ---------- sections ---------- */
+.vue{max-width:46rem;margin:0 auto;padding:1.8rem 1.25rem 2rem}
+.vue[hidden]{display:none!important}
+
+h2{
+  font-family:var(--serif);font-weight:400;font-size:var(--t-xxl);
+  line-height:1.05;margin:0 0 .3rem;text-wrap:balance;
+}
+h3{
+  font-family:var(--sans);font-weight:700;font-size:var(--t-l);
+  margin:2.4rem 0 .6rem;line-height:1.25;text-wrap:balance;
+}
+h4{
+  font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--or-sourd);
+  margin:2rem 0 .7rem;font-weight:700;
+}
+p{margin:0 0 1rem;max-width:36rem}
+.intro-vue{color:var(--cendre);font-size:var(--t-m);margin-bottom:2rem;max-width:34rem}
+strong{color:#fff;font-weight:700}
+em.cle{font-style:normal;color:var(--or);font-weight:700}
+
+/* ---------- blocs ---------- */
+.bloc{
+  background:var(--bois);border:1px solid var(--trait);
+  border-radius:3px;padding:1.1rem 1.15rem;margin:0 0 1rem;
+}
+.bloc p:last-child{margin-bottom:0}
+.bloc--alerte{border-left:3px solid var(--sang)}
+.bloc--or{border-left:3px solid var(--or)}
+.bloc--eau{border-left:3px solid var(--eau)}
+
+.liste-num{list-style:none;counter-reset:n;padding:0;margin:0;display:grid;gap:.9rem}
+.liste-num li{
+  counter-increment:n;position:relative;padding-left:2.6rem;
+}
+.liste-num li::before{
+  content:counter(n,decimal-leading-zero);
+  position:absolute;left:0;top:.1rem;
+  font-family:var(--mono);font-size:var(--t-xs);color:var(--or-sourd);
+  border:1px solid var(--trait);border-radius:2px;padding:.1rem .3rem;
+}
+.liste-num b{display:block;color:#fff}
+
+/* ---------- les rôles ---------- */
+.roles{display:grid;gap:.8rem;margin:1.4rem 0}
+.role{
+  background:var(--bois);border:1px solid var(--trait);border-radius:3px;
+  padding:1rem 1.1rem;display:grid;gap:.35rem;
+}
+.role .nom{
+  font-family:var(--serif);font-size:var(--t-xl);line-height:1;color:var(--or);
+}
+.role .quoi{font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--cendre)}
+.role p{margin:.3rem 0 0;font-size:var(--t-s)}
+
+/* ---------- le répétiteur ---------- */
+.choix{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1.4rem}
+.puce{
+  font-family:var(--sans);font-size:var(--t-s);font-weight:500;
+  background:transparent;color:var(--craie);
+  border:1px solid var(--trait);border-radius:2rem;
+  padding:.55rem 1rem;cursor:pointer;transition:background .15s,border-color .15s,color .15s;
+}
+.puce:hover{border-color:var(--or-sourd)}
+.puce[aria-pressed="true"]{background:var(--or);border-color:var(--or);color:#1a1510;font-weight:700}
+.puce:focus-visible,.gros:focus-visible,.onglet:focus-visible,.case:focus-visible{outline:2px solid var(--eau);outline-offset:2px}
+
+.gros{
+  width:100%;font-family:var(--sans);font-size:var(--t-m);font-weight:700;
+  background:var(--eau);color:#0d1416;border:none;border-radius:3px;
+  padding:1rem;cursor:pointer;letter-spacing:.02em;
+}
+.gros:hover{filter:brightness(1.08)}
+.gros[disabled]{opacity:.35;cursor:not-allowed}
+.gros--creux{background:transparent;color:var(--craie);border:1px solid var(--trait)}
+
+.scene-boite{
+  background:var(--bois);border:1px solid var(--trait);border-radius:3px;
+  padding:1.3rem 1.2rem;margin:1.2rem 0;min-height:15rem;
+  display:flex;flex-direction:column;justify-content:center;gap:.8rem;
+}
+.scene-didascalie{
+  font-style:italic;color:var(--cendre);font-size:var(--t-s);
+  border-left:2px solid var(--trait);padding-left:.8rem;
+}
+.scene-qui{
+  font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--or-sourd);
+}
+.scene-qui.moi{color:var(--or)}
+.scene-texte{
+  font-family:var(--serif);font-size:clamp(1.4rem,6vw,2.1rem);line-height:1.2;
+  margin:0;max-width:none;
+}
+.scene-texte.cachee{
+  color:transparent;background:var(--bois-clair);border-radius:3px;
+  user-select:none;
+}
+.scene-vide{color:var(--cendre);text-align:center;font-size:var(--t-s);margin:0}
+.mon-tour{
+  font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--or);border:1px solid var(--or-sourd);
+  border-radius:2px;padding:.3rem .5rem;align-self:flex-start;
+}
+.jauge{height:3px;background:var(--trait);border-radius:2px;overflow:hidden;margin:.8rem 0 0}
+.jauge i{display:block;height:100%;background:var(--or);width:0;transition:width .25s}
+.commandes{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.8rem}
+.commandes .gros{font-size:var(--t-s);padding:.85rem}
+.avis{font-size:var(--t-xs);color:var(--cendre);margin:.8rem 0 0}
+
+/* ---------- caméra ---------- */
+.lecon{
+  background:var(--bois);border:1px solid var(--trait);border-radius:3px;
+  margin:0 0 1rem;overflow:hidden;
+}
+.lecon-visu{
+  background:var(--encre);border-bottom:1px solid var(--trait);
+  height:8.5rem;position:relative;overflow:hidden;
+}
+.lecon-txt{padding:.9rem 1.1rem 1.1rem}
+.lecon-txt h5{
+  font-family:var(--sans);font-size:var(--t-m);font-weight:700;margin:0 0 .35rem;color:#fff;
+}
+.lecon-txt p{font-size:var(--t-s);margin:0;color:var(--cendre);max-width:none}
+.lecon-txt p + p{margin-top:.5rem}
+
+.perso{position:absolute;background:var(--or-sourd);border-radius:40% 40% 10% 10%}
+.sol{position:absolute;left:0;right:0;bottom:1.4rem;height:1px;background:var(--trait)}
+.cadre{
+  position:absolute;border:2px solid var(--eau);border-radius:2px;
+  box-shadow:0 0 0 999px rgba(19,21,26,.62);
+}
+@keyframes pano{0%,12%{transform:translateX(-32%)}50%,62%{transform:translateX(32%)}100%{transform:translateX(-32%)}}
+@keyframes trav{0%,12%{transform:scale(1)}55%,70%{transform:scale(1.65)}100%{transform:scale(1)}}
+@keyframes larg{0%,18%{width:84%;height:80%;top:10%;left:8%}55%,72%{width:30%;height:42%;top:14%;left:35%}100%{width:84%;height:80%;top:10%;left:8%}}
+.anim-pano{animation:pano 7s ease-in-out infinite}
+.anim-trav{animation:trav 7s ease-in-out infinite}
+.anim-larg{animation:larg 8s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){
+  .anim-pano,.anim-trav,.anim-larg{animation:none}
+}
+
+/* ---------- la liste des plans ---------- */
+.case{
+  display:flex;gap:.75rem;align-items:flex-start;
+  background:var(--bois);border:1px solid var(--trait);border-radius:3px;
+  padding:.75rem .9rem;cursor:pointer;width:100%;text-align:left;
+  font:inherit;color:inherit;
+}
+.case + .case{margin-top:.4rem}
+.case .coche{
+  flex:0 0 auto;width:1.15rem;height:1.15rem;margin-top:.18rem;
+  border:1px solid var(--or-sourd);border-radius:2px;position:relative;
+}
+.case[aria-pressed="true"]{opacity:.45}
+.case[aria-pressed="true"] .coche{background:var(--or);border-color:var(--or)}
+.case[aria-pressed="true"] .coche::after{
+  content:"";position:absolute;left:.33rem;top:.1rem;width:.3rem;height:.6rem;
+  border:solid #1a1510;border-width:0 2px 2px 0;transform:rotate(42deg);
+}
+.case[aria-pressed="true"] .libelle{text-decoration:line-through}
+.case .libelle{font-size:var(--t-s);line-height:1.45}
+.case .ou{display:block;font-family:var(--mono);font-size:var(--t-xs);color:var(--cendre);margin-top:.15rem}
+.compteur{font-family:var(--mono);font-size:var(--t-xs);color:var(--or-sourd);margin:0 0 1rem}
+
+/* ---------- scénario ---------- */
+.seq{border-top:1px solid var(--trait);padding-top:1.4rem;margin-top:2rem}
+.seq-num{font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.14em;color:var(--or-sourd);text-transform:uppercase}
+.seq h3{margin:.3rem 0 .2rem;font-family:var(--serif);font-weight:400;font-size:var(--t-xl)}
+.seq-lieu{font-family:var(--mono);font-size:var(--t-xs);color:var(--cendre);margin:0 0 1.1rem}
+.dida{font-style:italic;color:var(--cendre);font-size:var(--t-s);margin:0 0 .9rem;max-width:34rem}
+.repl{margin:0 0 .9rem;max-width:34rem}
+.repl .q{font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--or);display:block}
+.repl .t{display:block;margin-top:.15rem}
+.note{
+  background:var(--bois);border-left:3px solid var(--or-sourd);border-radius:0 3px 3px 0;
+  padding:.8rem .95rem;margin:1.1rem 0;font-size:var(--t-s);color:var(--cendre);
+}
+.note b{color:var(--or);font-weight:700}
+
+/* ---------- navigation ---------- */
+.barre{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:rgba(19,21,26,.96);border-top:1px solid var(--trait);
+  backdrop-filter:blur(8px);
+  padding:.35rem .3rem calc(.35rem + env(safe-area-inset-bottom));
+}
+.barre ul{list-style:none;margin:0 auto;padding:0;display:flex;max-width:46rem}
+.barre li{flex:1}
+.onglet{
+  width:100%;background:none;border:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:.2rem;
+  padding:.5rem .1rem;color:var(--cendre);font-family:var(--sans);
+  font-size:.68rem;letter-spacing:.04em;
+}
+.onglet svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.onglet[aria-selected="true"]{color:var(--or)}
+
+.pied{
+  max-width:46rem;margin:0 auto;padding:2.5rem 1.25rem 1rem;
+  border-top:1px solid var(--trait);color:var(--cendre);font-size:var(--t-xs);
+}
+</style>
+
+<header class="ouverture">
+  <p class="surtitre">Court métrage policier · 3 comédiennes</p>
+  <h1>Tourner<br><em>Le Guerrier</em></h1>
+  <p class="chapo">Tout ce qu'il faut pour fabriquer le film, de la première répétition au dernier plan. Ouvre cette page sur ton téléphone pendant le tournage : elle est faite pour ça.</p>
+  <div class="fiche">
+    <span>9 à 10 min</span>
+    <span>3 rôles</span>
+    <span>aucun adulte à l'écran</span>
+    <span>tourné au téléphone</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 1. L'HISTOIRE ============ -->
+<section class="vue" id="vue-histoire">
+  <h2>L'histoire</h2>
+  <p class="intro-vue">Avant de filmer quoi que ce soit, il faut que vous sachiez toutes les trois ce que vous racontez. Sinon on filme des gens qui disent des phrases, et ça se voit.</p>
+
+  <div class="bloc bloc--or">
+    <p><strong>En une phrase :</strong> trois copines passent l'après-midi chez le grand-père de l'une d'elles, une statue disparaît de la vitrine, elles ont jusqu'à 19 heures pour la retrouver, et la voleuse est celle qui mène l'enquête.</p>
+  </div>
+
+  <h3>L'horloge</h3>
+  <p>Le film commence à 15 h 30 et se termine à 19 h. <em class="cle">Le grand-père rentre à 19 heures.</em> C'est pour ça que personne n'appelle un adulte, c'est pour ça que personne n'appelle la police, et c'est pour ça qu'on est pressées du début à la fin. Dès que vous jouez, pensez à l'heure. Plus le film avance, plus vous parlez vite.</p>
+
+  <h3>Les trois rôles</h3>
+  <div class="roles">
+    <div class="role">
+      <span class="nom">Lou</span>
+      <span class="quoi">la petite-fille · elle mène l'enquête</span>
+      <p>C'est l'appartement de son grand-père, c'est elle qui a les clés, c'est elle qui devra le regarder en face à 19 heures. Elle rit fort, elle est au centre de la bande sans s'en rendre compte. Et c'est ça, justement, le problème.</p>
+    </div>
+    <div class="role">
+      <span class="nom">Jade</span>
+      <span class="quoi">l'innocente · on l'accuse</span>
+      <p>Directe, cash, elle dit ce qu'elle pense. Elle n'a rien fait. Elle se défend très mal parce qu'elle s'énerve, et plus elle s'énerve plus elle a l'air coupable. Le rôle le plus difficile et le plus beau du film.</p>
+    </div>
+    <div class="role">
+      <span class="nom">Lina</span>
+      <span class="quoi">la troisième · c'est elle</span>
+      <p>Gentille, serviable, toujours là pour aider. Celle dont on oublie l'avis. Celle à qui on dit « attends » et puis on passe à autre chose.</p>
+      <p>Et ce que le film ne dira qu'à la fin : <strong>elle n'aime pas Lou. Elle ne l'a jamais aimée.</strong> Depuis six ans elle la regarde avoir tout ce qu'elle n'a pas, et la jalousie a eu le temps de devenir autre chose. Elle n'a pas volé sur un coup de tête. Elle a attendu, et elle a frappé exactement là où Lou lui avait montré qu'elle était fragile.</p>
+    </div>
+  </div>
+
+  <div class="bloc bloc--alerte">
+    <p><strong>La règle d'or, et si vous ne retenez qu'une chose, retenez celle-là.</strong></p>
+    <p>Pendant huit minutes, celle qui joue Lina joue <em class="cle">une amie</em>, et une vraie. Sincèrement inquiète, sincèrement serviable, elle défend sincèrement Jade. Pas de regard en coin, pas de petit sourire en biais, pas de musique inquiétante dans la tête.</p>
+    <p>Si on devine à la deuxième minute, le film est mort. Tout le plaisir, c'est de se faire avoir.</p>
+    <p><strong>Mais quatre fois, une demi-seconde, quelque chose dépasse.</strong> Et à la fin, plus rien ne se retient.</p>
+  </div>
+
+  <h3>Les quatre fêlures</h3>
+  <p>C'est la méthode des films à suspense : on ne montre pas la folie, on la laisse dépasser. Quatre fois, pendant une demi-seconde, on voit quelque chose qui ne va pas, et on n'est pas sûr de l'avoir vu. C'est exactement ce qu'il faut.</p>
+  <ol class="liste-num">
+    <li><b>Le doigt sur la vitre · séquence 1</b> Les autres sont sorties. Lina reste seule devant la vitrine. Elle pose son index sur la vitre, juste devant la statue, et elle l'y laisse deux secondes.</li>
+    <li><b>Le sourire qui reste · séquence 2</b> Lou et Jade rient d'un souvenir où Lina n'était pas. Elles s'arrêtent de rire. Lina, elle, continue de sourire une seconde de trop, et son sourire ne bouge plus.</li>
+    <li><b>Les trois notes · séquence 5</b> Juste après avoir planté une fausse piste, Lina s'éloigne et elle fredonne. Trois notes, très bas, presque pour elle. On l'entend à peine.</li>
+    <li><b>Le calme · séquence 6</b> Jade part en pleurant, Lou est bouleversée, et Lina est parfaitement calme. Pas triste, pas gênée. Calme. Deux secondes sur son visage, et on coupe.</li>
+  </ol>
+  <div class="bloc bloc--eau">
+    <p><strong>Les trois notes qu'elle fredonne</strong> reviennent trois fois dans le film : à la fêlure 3, à la fin de la confrontation quand elle reste seule, et dans le tout dernier plan, par-dessus la balle de ping-pong. N'importe quelle petite mélodie fait l'affaire, du moment que c'est toujours la même.</p>
+  </div>
+
+  <h3>Les trois indices</h3>
+  <p>Un bon film policier doit pouvoir être gagné par celui qui regarde. Les trois indices sont à l'écran, en clair, dès la première fois.</p>
+  <ol class="liste-num">
+    <li><b>L'ombre du ping-pong</b> Lina dit qu'elle a filmé ses smashs d'une seule traite. Mais au début de sa vidéo l'ombre de la table tombe à gauche, et à la fin elle tombe à droite. Ce sont deux morceaux collés. Il lui manque vingt minutes.</li>
+    <li><b>L'élastique de Jade</b> Lina le « trouve » par terre près de la vitrine. On reverra ce plan à la fin, une seconde plus longtemps, et on verra qu'elle ne le ramasse pas : elle le pose.</li>
+    <li><b>La clé</b> La vitrine n'est pas forcée, et la clé est restée sur son crochet dans la cuisine. Personne n'est entré. Donc c'est l'une de nous.</li>
+  </ol>
+
+  <h3>La règle secrète du film</h3>
+  <div class="bloc bloc--eau">
+    <p><em class="cle">Le même plan, une seconde de plus, et ce n'est plus la même histoire.</em></p>
+    <p>Quatre plans du film sont montrés deux fois : une fois courts, une fois longs. La première fois, on ne comprend rien. La deuxième fois, on comprend tout. C'est l'idée du film, et c'est pour ça qu'il faut toujours <strong>laisser tourner la caméra deux secondes de plus que nécessaire</strong>. Toujours.</p>
+  </div>
+</section>
+
+<!-- ============ 2. RÉPÉTER ============ -->
+<section class="vue" id="vue-repeter" hidden>
+  <h2>Répéter</h2>
+  <p class="intro-vue">Personne n'apprend neuf minutes de texte par cœur. Choisis ton rôle et une scène : le téléphone dit les répliques des autres à voix haute, et il s'arrête quand c'est à toi. Tu réponds, tu appuies, ça continue.</p>
+
+  <h4>Je joue</h4>
+  <div class="choix" id="choix-role" role="group" aria-label="Choisir son rôle"></div>
+
+  <h4>La scène</h4>
+  <div class="choix" id="choix-scene" role="group" aria-label="Choisir la scène"></div>
+
+  <div class="scene-boite" id="scene-boite" aria-live="polite">
+    <p class="scene-vide" id="scene-vide">Choisis ton rôle et une scène, puis appuie sur Commencer.</p>
+  </div>
+  <div class="jauge"><i id="jauge-barre"></i></div>
+
+  <div class="commandes">
+    <button class="gros" id="btn-go" disabled>Commencer</button>
+    <button class="gros gros--creux" id="btn-suiv" disabled>À moi, c'est dit</button>
+  </div>
+  <div class="commandes" style="grid-template-columns:1fr 1fr">
+    <button class="gros gros--creux" id="btn-cache" aria-pressed="false">Cacher mes répliques</button>
+    <button class="gros gros--creux" id="btn-stop">Arrêter</button>
+  </div>
+  <p class="avis" id="avis-voix"></p>
+
+  <h3>Comment on répète pour de vrai</h3>
+  <ol class="liste-num">
+    <li><b>D'abord à trois, assises, sans bouger</b> On lit la scène à voix haute, c'est tout. Trois fois. On ne joue pas encore, on écoute.</li>
+    <li><b>Ensuite debout, dans le vrai décor</b> On refait la scène là où on va la tourner, avec les vrais déplacements. Pas de caméra.</li>
+    <li><b>Puis une fois filmée, pour voir</b> On se regarde. C'est désagréable et c'est ce qui fait progresser le plus vite.</li>
+    <li><b>Et seulement après, on tourne</b> Jamais plus de trois prises d'affilée. Au-delà, tout le monde est fatigué et c'est la prise 2 qu'on gardera.</li>
+  </ol>
+
+  <div class="bloc bloc--or">
+    <p><strong>Le truc qui change tout :</strong> il ne faut pas réciter. Il faut écouter l'autre et répondre. Si tu penses à ta phrase pendant que l'autre parle, ça se voit sur ton visage. Écoute-la vraiment, et ta phrase sortira toute seule.</p>
+  </div>
+
+  <h3>Jouer la folie, à la fin</h3>
+  <p>La séquence 9 est la scène la plus difficile du film, et c'est aussi celle que tout le monde retiendra. Voilà comment on la joue.</p>
+  <ol class="liste-num">
+    <li><b>On change de personne toutes les dix secondes</b> Elle rit, elle redevient glaciale, elle parle doucement comme à une amie, elle hurle, elle s'effondre, elle redevient polie. Et à aucun moment elle ne prévient. Les coupures sont nettes, jamais progressives.</li>
+    <li><b>Ce ne sont pas les cris qui font peur</b> Ce sont les passages doux. « Tu veux que je te dise le pire ? » dit avec un vrai sourire gentil doit être plus effrayant que tous les hurlements. C'est le contraste qui travaille, pas le volume.</li>
+    <li><b>Les larmes doivent arriver sans prévenir</b> Pas de montée, pas de voix qui tremble avant. Elle hurle, et la phrase d'après elle sanglote. D'un coup.</li>
+    <li><b>Le retour au calme en une seconde</b> Elle s'essuie le visage, elle remet ses cheveux, et la voix est parfaitement normale. Pas de reniflement, pas de reste de larmes. C'est le moment précis où la salle va avoir froid.</li>
+    <li><b>Et la dernière réplique</b> « Vous voulez que je vous aide à chercher ? » se dit exactement du même ton que « tu veux un bonbon ? ». Gentiment. Serviablement. Rien d'autre.</li>
+  </ol>
+  <div class="bloc bloc--eau">
+    <p><strong>Pour s'entraîner :</strong> prends la scène et joue-la trois fois de suite avec une seule couleur à chaque fois. Une fois tout en colère. Une fois tout en douceur. Une fois tout en larmes. Et seulement après, mélange. On trouve toujours les bons changements comme ça.</p>
+    <p>Et un conseil qui vaut de l'or : <em class="cle">cette scène se tourne en un seul plan</em>, sans coupure, et on la refait en entier à chaque prise. Si on la coupe en morceaux, la folie retombe entre deux.</p>
+  </div>
+</section>
+
+<!-- ============ 3. FILMER ============ -->
+<section class="vue" id="vue-filmer" hidden>
+  <h2>Filmer</h2>
+  <p class="intro-vue">Tout se tourne avec un téléphone. Un téléphone filme très bien. Ce qui rate, dans un film d'élèves, ce n'est presque jamais l'image : c'est le son, et c'est le manque de plans.</p>
+
+  <h3>Les six règles du téléphone</h3>
+  <ol class="liste-num">
+    <li><b>Toujours à l'horizontale</b> Le téléphone couché, jamais debout. Un film vertical ne ressemble pas à un film.</li>
+    <li><b>Le micro à moins d'un mètre</b> C'est la règle la plus importante de toute cette page. Celle qui filme doit être <em class="cle">tout près</em> de celle qui parle. Si tu filmes de loin, on n'entendra rien, et un film qu'on n'entend pas est un film raté.</li>
+    <li><b>Jamais face à la fenêtre</b> La lumière doit tomber sur les visages, pas derrière. Si tu filmes quelqu'un avec la fenêtre dans le dos, tu obtiens une ombre noire.</li>
+    <li><b>Verrouille la mise au point</b> Appuie deux secondes sur le visage à l'écran jusqu'à ce que ça écrive AE/AF. Sinon l'image refait le point toute seule au milieu de la phrase.</li>
+    <li><b>Jamais de zoom pendant un plan</b> Le zoom du téléphone abîme l'image et ça fait tout de suite amateur. Si tu veux être plus près, avance.</li>
+    <li><b>Deux secondes de rab, au début et à la fin</b> Tu lances l'enregistrement, tu comptes deux secondes dans ta tête, et seulement après tu dis « action ». Pareil à la fin. Ça sauve le montage à chaque fois.</li>
+  </ol>
+
+  <h3>Les cinq façons de poser la caméra</h3>
+  <p>Il n'y en a pas trente-six. Avec ces cinq-là, on fait tout le film.</p>
+
+  <div class="lecon">
+    <div class="lecon-visu">
+      <div class="sol"></div>
+      <div class="perso" style="left:46%;bottom:1.4rem;width:8%;height:48%"></div>
+      <div class="cadre anim-larg" style="width:84%;height:80%;top:10%;left:8%"></div>
+    </div>
+    <div class="lecon-txt">
+      <h5>Le plan large et le plan serré</h5>
+      <p>Le plan large montre <strong>où on est</strong>. Le plan serré montre <strong>ce qu'on ressent</strong>. Un film, c'est l'alternance des deux, tout le temps.</p>
+      <p>Règle simple : dès que quelqu'un a une émotion forte, va plus près. Dès que quelqu'un est seul et perdu, recule très loin.</p>
+    </div>
+  </div>
+
+  <div class="lecon">
+    <div class="lecon-visu">
+      <div class="sol"></div>
+      <div class="perso" style="left:48%;bottom:1.4rem;width:7%;height:44%"></div>
+      <div class="cadre" style="width:50%;height:70%;top:15%;left:25%"></div>
+    </div>
+    <div class="lecon-txt">
+      <h5>Le plan fixe</h5>
+      <p>La caméra ne bouge pas du tout. C'est le plan le plus utilisé au cinéma, et c'est celui que les débutants n'osent jamais faire.</p>
+      <p>Pose le téléphone sur une table, un muret, une pile de livres. Un plan fixe bien posé est toujours plus beau qu'un plan qui tremble.</p>
+    </div>
+  </div>
+
+  <div class="lecon">
+    <div class="lecon-visu">
+      <div class="sol"></div>
+      <div class="perso" style="left:22%;bottom:1.4rem;width:7%;height:42%"></div>
+      <div class="perso" style="left:68%;bottom:1.4rem;width:7%;height:46%"></div>
+      <div class="cadre anim-pano" style="width:44%;height:72%;top:14%;left:28%"></div>
+    </div>
+    <div class="lecon-txt">
+      <h5>Le panoramique</h5>
+      <p>Tu restes sur place et tu tournes seulement le téléphone, comme une tête qui se tourne. Sert à passer d'une personne à une autre, ou à suivre quelqu'un qui marche.</p>
+      <p>Très lentement. Beaucoup plus lentement que tu ne crois. Et tu t'arrêtes deux secondes au début et à la fin du mouvement.</p>
+    </div>
+  </div>
+
+  <div class="lecon">
+    <div class="lecon-visu">
+      <div class="sol"></div>
+      <div class="perso" style="left:46%;bottom:1.4rem;width:8%;height:48%"></div>
+      <div class="cadre anim-trav" style="width:56%;height:76%;top:12%;left:22%"></div>
+    </div>
+    <div class="lecon-txt">
+      <h5>Le travelling</h5>
+      <p>Cette fois c'est <strong>toi</strong> qui te déplaces avec le téléphone. Tu avances vers quelqu'un, ou tu marches à côté d'elle.</p>
+      <p>Le secret : plie les genoux et marche en roulant le pied, du talon vers les orteils, comme un chat. Et colle tes coudes contre ton corps. Ça tremble trois fois moins.</p>
+    </div>
+  </div>
+
+  <div class="lecon">
+    <div class="lecon-visu">
+      <div class="sol"></div>
+      <div class="perso" style="left:14%;bottom:1.4rem;width:5%;height:16%;border-radius:2px"></div>
+      <div class="perso" style="left:24%;bottom:1.4rem;width:5%;height:16%;border-radius:2px"></div>
+      <div class="cadre" style="width:34%;height:34%;bottom:8%;left:8%;top:auto"></div>
+    </div>
+    <div class="lecon-txt">
+      <h5>Le plan de coupe</h5>
+      <p>Un plan où il n'y a personne, ou seulement un détail : des pieds qui marchent dans le gravier, une main sur une poignée, l'eau de la piscine, une balle de ping-pong par terre.</p>
+      <p>C'est le plan qui sauve tout. Quand deux plans ne se collent pas bien au montage, on glisse un plan de coupe entre les deux et le problème disparaît. <em class="cle">On n'en a jamais assez.</em></p>
+    </div>
+  </div>
+
+  <h3>Les plans qu'on oublie toujours</h3>
+  <p>On n'est pas obligées de voir vos visages tout le temps. Au contraire. Un film qui ne montre que des têtes qui parlent fatigue au bout de trois minutes.</p>
+  <ol class="liste-num">
+    <li><b>Les pieds</b> Filme au ras du sol : trois paires de baskets qui marchent dans le gravier. On entend les pas. On sait qui arrive sans voir personne.</li>
+    <li><b>Les mains</b> La main qui ouvre la vitrine. La main qui serre le carnet. La main de Jade qui s'arrête en l'air.</li>
+    <li><b>Le dos</b> Quelqu'un filmé de dos, c'est quelqu'un à qui on ne peut pas parler. C'est parfait pour Jade quand elle part.</li>
+    <li><b>Le flou</b> Pose ton doigt deux secondes sur le premier plan pour que le fond devienne flou, et filme à travers une feuille, un buisson, un grillage. On dirait qu'on espionne.</li>
+    <li><b>Les reflets</b> Un visage dans la vitre de la vitrine, dans l'eau de la piscine, dans une fenêtre. Ça ne coûte rien et ça fait toujours de l'effet.</li>
+    <li><b>Le vide</b> Le jardin sans personne. Le banc sans personne. C'est là qu'on met la musique.</li>
+  </ol>
+
+  <h3>Tourner dans un petit appartement</h3>
+  <div class="bloc bloc--eau">
+    <p>Trente mètres carrés, ce n'est pas un problème : <em class="cle">c'est un style</em>. Dans un petit espace, on ne peut pas reculer, donc on filme des morceaux. Et des morceaux, dans un film policier, c'est exactement ce qu'il faut.</p>
+  </div>
+  <ol class="liste-num">
+    <li><b>Ne montre jamais la pièce entière</b> Un seul plan large au début, et après, que du serré. Personne ne saura si l'appartement fait 30 ou 300 mètres carrés.</li>
+    <li><b>La baie vitrée est ton projecteur</b> Place celles qui parlent <em class="cle">face à la baie</em>, et toi dos à la baie. La lumière du jour est la plus belle qui existe et elle est gratuite.</li>
+    <li><b>Ne filme jamais vers la baie</b> Sinon tu obtiens trois silhouettes noires. C'est l'erreur numéro un dans un appartement.</li>
+    <li><b>Si tu dois filmer vers la fenêtre</b> ferme à moitié le rideau et mets quelque chose de blanc par terre devant elles pour renvoyer la lumière sur les visages. Une feuille, un drap, un carton.</li>
+    <li><b>Le couloir, c'est le coin du placard</b> Pas besoin d'un vrai couloir : filme serré sur la porte du placard, on croira ce qu'on veut.</li>
+    <li><b>Le coin cuisine fait très bien le fond</b> Du moment qu'on voit un meuble, un plan de travail et un peu de profondeur derrière, le décor existe.</li>
+    <li><b>Range tout ce qui n'est pas de 1801</b> Pardon, de 2026. Chargeurs, paquets, affaires qui traînent : sortez-les du cadre avant chaque plan. C'est ce qui sépare une image qui fait vrai d'une image qui fait maison.</li>
+    <li><b>Et la vitrine, c'est la star</b> Filme-la de biais, pas de face, pour éviter ton propre reflet. Ou alors de face exprès, et on te voit dedans : c'est très beau, mais il faut le vouloir.</li>
+  </ol>
+
+  <h3>Le son, et c'est tout ce qui compte</h3>
+  <div class="bloc bloc--alerte">
+    <p>Un film flou qu'on entend bien, ça passe. Un film magnifique qu'on n'entend pas, c'est raté. Sans discussion.</p>
+    <p><strong>Les quatre réflexes :</strong> le téléphone à moins d'un mètre de celle qui parle. Pas de tournage s'il y a du vent, on attend. Pas de tournage s'il y a une voiture, une tondeuse, un avion, on attend. Et si vous avez des écouteurs avec un micro, mettez-les à celle qui parle et cachez le fil sous le pull.</p>
+  </div>
+</section>
+
+<!-- ============ 4. LES PLANS ============ -->
+<section class="vue" id="vue-plans" hidden>
+  <h2>La liste des plans</h2>
+  <p class="intro-vue">Coche au fur et à mesure. Tes coches restent enregistrées sur ce téléphone, même si tu fermes la page.</p>
+  <p class="compteur" id="compteur">0 plan tourné sur 0</p>
+
+  <h4>Ce qui se tourne deux fois, surtout ne pas oublier</h4>
+  <div class="bloc bloc--alerte">
+    <p><strong>Le ping-pong de Lina doit être filmé deux fois dans la journée :</strong> une fois vers 14 h, une fois vers 18 h. C'est le soleil qui fabrique la preuve du film, pas vous. <em class="cle">Mêmes vêtements les deux fois</em>, sinon tout est à refaire.</p>
+  </div>
+
+  <div id="liste-plans"></div>
+
+  <h3>Dans quel ordre tourner</h3>
+  <ol class="liste-num">
+    <li><b>Jour 1, début d'après-midi</b> Tout le ping-pong et la piscine, pendant que l'ombre est d'un côté. Plus le plan de la fenêtre vue du jardin.</li>
+    <li><b>Jour 1, fin d'après-midi</b> Le deuxième ping-pong de Lina, mêmes vêtements. Et les plans de coupe du jardin avec la lumière basse.</li>
+    <li><b>Jour 2, à l'intérieur</b> Toutes les scènes de l'appartement d'un coup, parce qu'il faut ranger le décor une seule fois.</li>
+    <li><b>Jour 2, fin de journée</b> Les feuilles, les poubelles, et le tout dernier plan du ping-pong au soleil couchant.</li>
+    <li><b>Jour 3, les plans de coupe</b> Une seule personne, toute seule, avec la liste ci-dessus. Vingt minutes, et c'est ce qui fera la différence.</li>
+  </ol>
+</section>
+
+<!-- ============ 5. LE SCÉNARIO ============ -->
+<section class="vue" id="vue-scenario" hidden>
+  <h2>Le scénario</h2>
+  <p class="intro-vue">Le texte complet, dans l'ordre. Les encadrés dorés sont les consignes de tournage, ils ne se jouent pas.</p>
+  <div id="scenario-complet"></div>
+</section>
+
+<div class="pied">
+  <p>Le Guerrier · court métrage · scénario et dossier de tournage écrits pour ce projet.<br>Le montage et les musiques sont faits à part. Toi, tu fais le film.</p>
+</div>
+
+</main>
+
+<nav class="barre" aria-label="Sections">
+  <ul role="tablist">
+    <li><button class="onglet" role="tab" aria-selected="true" data-vue="histoire"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 5v14M16 5v14"/></svg>Histoire</button></li>
+    <li><button class="onglet" role="tab" aria-selected="false" data-vue="repeter"><svg viewBox="0 0 24 24"><path d="M12 3v10"/><path d="M9 6l3-3 3 3"/><path d="M5 13a7 7 0 0014 0"/><path d="M12 20v1"/></svg>Répéter</button></li>
+    <li><button class="onglet" role="tab" aria-selected="false" data-vue="filmer"><svg viewBox="0 0 24 24"><path d="M3 7h12v10H3z"/><path d="M15 11l6-3v8l-6-3z"/></svg>Filmer</button></li>
+    <li><button class="onglet" role="tab" aria-selected="false" data-vue="plans"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><path d="M2 6l1 1 1.5-2"/><path d="M2 12l1 1 1.5-2"/></svg>Les plans</button></li>
+    <li><button class="onglet" role="tab" aria-selected="false" data-vue="scenario"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 12h7M9 16h5"/></svg>Scénario</button></li>
+  </ul>
+</nav>
+
+<script>
+"use strict";
+
+/* ===================== LE TEXTE DU FILM ===================== */
+/* type: "d" didascalie (ne se dit pas) · "r" réplique · "n" note de tournage */
+
+const ROLES = ["LOU","JADE","LINA"];
+
+const SCENES = [
+ {id:"s1", titre:"1. La légende", lieu:"Intérieur. Appartement du grand-père. 15 h 30.", l:[
+  {t:"d",x:"Gros plan sur une statue derrière une vitre : un guerrier espagnol, en bois sombre, immobile. On entend des filles rire, loin, hors champ. La caméra recule lentement et découvre la vitrine, le meuble en bois, et les trois filles devant."},
+  {t:"r",q:"LOU",x:"Approchez. Mais vous touchez pas."},
+  {t:"d",x:"Jade colle son nez à la vitre. Lina reste un pas en arrière."},
+  {t:"r",q:"JADE",x:"Il est trop beau. Il vient d'où ?"},
+  {t:"r",q:"LOU",x:"D'Espagne. Mon grand-père le raconte à tout le monde, il adore cette histoire."},
+  {t:"d",x:"Elle prend un ton de conteuse. Elle en rajoute, elle s'amuse."},
+  {t:"r",q:"LOU",x:"Au début il appartenait à un collectionneur. Un vieux monsieur, très riche, qui avait une maison pleine de choses comme ça. Et une nuit, quelqu'un est entré chez lui et l'a volé."},
+  {t:"r",q:"JADE",x:"Sérieux ?"},
+  {t:"r",q:"LOU",x:"Sérieux. Et après, plus rien. Pendant des années. Personne ne savait où il était."},
+  {t:"r",q:"LOU",x:"Et un jour, mon grand-père se promène sur un marché, et il le voit. Là. Posé sur une table, entre des assiettes et des vieilles lampes."},
+  {t:"r",q:"JADE",x:"Non !"},
+  {t:"r",q:"LOU",x:"Il l'a racheté trois euros."},
+  {t:"d",x:"Jade éclate de rire. Lou aussi."},
+  {t:"r",q:"LOU",x:"Mon grand-père, il dit qu'elle est revenue toute seule."},
+  {t:"d",x:"Elle referme la vitrine. On entend le petit claquement."},
+  {t:"r",q:"LOU",x:"Bon. Il rentre à sept heures. D'ici là on a le jardin, la piscine et le ping-pong. Et on touche à rien ici."},
+  {t:"d",x:"Elles sortent. Lina sort la dernière. Elle s'arrête devant la vitrine. Elle pose son index sur la vitre, juste devant la statue, et elle l'y laisse deux secondes. Puis elle suit les autres."},
+  {t:"n",x:"FÊLURE 1. Ce doigt sur la vitre est le premier signe que quelque chose ne va pas. On ne le souligne pas, on ne met pas de musique dessus, et personne ne le commente. Deux secondes, et on coupe."},
+  {t:"n",x:"Le claquement de la vitrine est le premier son important du film. On le réentendra tout à la fin."}
+ ]},
+
+ {id:"s2", titre:"2. L'après-midi", lieu:"Extérieur. Jardin, ping-pong, piscine. 15 h 45 à 17 h.", l:[
+  {t:"n",x:"La séquence la plus importante du film. Il ne s'y passe rien, et tout s'y passe. Tous les indices sont posés ici, en plein jour, sous les yeux du spectateur."},
+  {t:"d",x:"A. LE PING-PONG. Jade et Lou jouent. Elles rient, elles ratent, elles recommencent. Lina est assise sur le banc, à côté, et regarde."},
+  {t:"r",q:"LINA",x:"Moi je joue après ?"},
+  {t:"d",x:"Personne ne répond. Jade vient de rater une balle, elles crient toutes les deux."},
+  {t:"r",q:"LINA",x:"… ouais, après."},
+  {t:"n",x:"Dans ce plan, l'ombre de la table doit être très visible par terre et tomber clairement d'un côté. C'est la preuve du film. À tourner en début d'après-midi."},
+  {t:"d",x:"B. LA PISCINE. Les trois, assises au bord, pieds dans l'eau. Lou et Jade parlent d'un souvenir entre elles. Elles rient."},
+  {t:"r",q:"JADE",x:"Tu te souviens quand t'as dit ça devant tout le monde ?"},
+  {t:"r",q:"LOU",x:"Arrête !"},
+  {t:"d",x:"Elles repartent à rire. Lina sourit, mais elle n'était pas là. Elle ne connaît pas l'histoire."},
+  {t:"r",q:"LINA",x:"C'était quand ?"},
+  {t:"r",q:"LOU",x:"Oh, c'est trop long à expliquer."},
+  {t:"d",x:"Lou se lève déjà. Les deux autres ont fini de rire. Lina, elle, sourit encore. Une seconde de trop. Son sourire ne bouge plus et elle les regarde."},
+  {t:"n",x:"FÊLURE 2. Tout tient dans le fait que le rire des deux autres s'arrête et que le sien ne s'arrête pas. Il faut filmer Lina seule dans le cadre à ce moment-là, sinon ça ne se verra pas."},
+  {t:"d",x:"C. LE SMASH. Retour au ping-pong. Lina pose son téléphone en appui contre un sac."},
+  {t:"r",q:"LINA",x:"Attendez, je filme. Je veux montrer mes services à mon père."},
+  {t:"r",q:"JADE",x:"Vas-y, Nadal."},
+  {t:"d",x:"Lina joue. Elle sert, elle smashe, elle rate, elle recommence. Elle filme tout."},
+  {t:"d",x:"D. LES BOISSONS."},
+  {t:"r",q:"LOU",x:"J'ai soif. Je monte chercher des trucs."},
+  {t:"d",x:"On la suit : elle entre, elle laisse la porte ouverte, elle va dans la cuisine, on entend le frigo. On voit la vitrine au fond, fermée, la statue dedans. Elle ressort avec trois canettes et laisse la porte entrouverte."},
+  {t:"d",x:"E. L'ÉLASTIQUE. Jade enlève l'élastique de ses cheveux et le pose sur la table de ping-pong."},
+  {t:"r",q:"JADE",x:"Il m'énerve, il me tire."},
+  {t:"d",x:"F. LE PLAN DE TROIS SECONDES. Plan fixe depuis le jardin : la fenêtre de l'appartement. Derrière la vitre, une silhouette passe. On ne voit pas qui. Trois secondes, et le plan suivant arrive."},
+  {t:"d",x:"G. LA CONFIDENCE. Le jardin, un banc. Lou et Lina, toutes les deux. Jade est plus loin."},
+  {t:"r",q:"LOU",x:"Tu sais, la statue, là… c'est ce qu'il a de plus précieux au monde."},
+  {t:"n",x:"On coupe exactement là, dix secondes, pas une de plus. Cette scène reviendra en entier à la fin du film, et c'est là qu'elle fera mal."},
+  {t:"n",x:"Aucune musique dans toute cette séquence. Uniquement les vrais sons : la balle, l'eau, les oiseaux, les voix."}
+ ]},
+
+ {id:"s3", titre:"3. La vitrine est vide", lieu:"Intérieur. Appartement. 17 h 10.", l:[
+  {t:"d",x:"Les trois rentrent, essoufflées, elles parlent fort. Lou s'arrête net au milieu de la pièce. Plan sur la vitrine : la porte est entrouverte. La place de la statue est vide. Silence."},
+  {t:"r",q:"LOU",x:"… Non."},
+  {t:"d",x:"Elle s'approche. Elle ouvre la vitrine en grand. Elle regarde derrière le meuble, par terre, sous le meuble."},
+  {t:"r",q:"LOU",x:"Non, non, non, non."},
+  {t:"r",q:"JADE",x:"Elle est peut-être tombée ?"},
+  {t:"r",q:"LOU",x:"Elle est pas tombée, Jade, elle est PAS LÀ."},
+  {t:"d",x:"Lou se retourne vers elles. Elle est blanche."},
+  {t:"r",q:"LOU",x:"Il rentre dans une heure cinquante."},
+  {t:"r",q:"LINA",x:"On touche à rien. Surtout, on touche à rien, c'est une scène de crime, faut rien toucher."},
+  {t:"d",x:"Lou la regarde. Elle hoche la tête. C'est raisonnable."},
+  {t:"n",x:"Premier battement de cœur, un seul, sourd, au moment où on voit la vitrine vide. La vitrine vide se filme en plan fixe, de face, et on laisse durer trois secondes. C'est très long à l'écran, et c'est exactement ce qu'il faut."}
+ ]},
+
+ {id:"s4", titre:"4. L'enquête commence", lieu:"Intérieur puis extérieur. 17 h 15.", l:[
+  {t:"d",x:"Lou arrache une feuille d'un carnet posé sur la table. Elle s'assoit."},
+  {t:"r",q:"LOU",x:"Bon. On reprend depuis le début. On est montées à quelle heure ?"},
+  {t:"r",q:"LINA",x:"Attends, je t'aide."},
+  {t:"d",x:"Lina sort son propre carnet de son sac. Un petit carnet. Elle l'ouvre à une page blanche."},
+  {t:"r",q:"LINA",x:"Vas-y, je note tout. Toi tu réfléchis."},
+  {t:"d",x:"Lou la regarde. C'est la première fois de la journée qu'elle la remarque vraiment."},
+  {t:"r",q:"LOU",x:"… Merci."},
+  {t:"r",q:"JADE",x:"Personne n'est entré. La porte du bas est fermée, il faut un badge."},
+  {t:"r",q:"LOU",x:"La porte d'ici était ouverte."},
+  {t:"r",q:"JADE",x:"Ouverte comment ?"},
+  {t:"r",q:"LOU",x:"Ouverte. Je l'ai laissée quand je suis descendue avec les canettes."},
+  {t:"d",x:"Un blanc. Les trois se regardent."},
+  {t:"r",q:"LINA",x:"Ça veut rien dire. N'importe qui aurait pu monter."},
+  {t:"r",q:"JADE",x:"Dans une résidence fermée ? Avec un badge ? Bien sûr."},
+  {t:"r",q:"LINA",x:"Jade, arrête, tu vas lui faire peur."},
+  {t:"d",x:"Lou se lève. Elle va vers la vitrine. Elle la regarde de près."},
+  {t:"r",q:"LOU",x:"Elle est pas cassée. Elle est pas forcée. Elle était même pas fermée à clé."},
+  {t:"d",x:"Elle se retourne lentement."},
+  {t:"r",q:"LOU",x:"La clé, elle est là. Sur le crochet. Dans la cuisine. Depuis ce matin."},
+  {t:"d",x:"Silence."},
+  {t:"r",q:"JADE",x:"Donc…"},
+  {t:"r",q:"LOU",x:"Donc c'est l'une de nous."},
+  {t:"n",x:"C'est le milieu du film et la réplique la plus importante. Aucune musique dessus, le silence suffit. Plan serré sur chacune des trois, deux secondes chacune. Jade regarde Lou. Lou regarde Jade. Lina regarde ses chaussures."}
+ ]},
+
+ {id:"s5", titre:"5. Les fausses pistes", lieu:"Extérieur. Jardin. 17 h 30 à 18 h.", l:[
+  {t:"n",x:"Lina n'accuse jamais Jade. Jamais. Elle fait le contraire : elle la défend. À chaque fois elle plante une idée et elle la retire tout de suite. Et Lou garde l'idée. Celle qui défend quelqu'un est celle qu'on soupçonne le moins."},
+  {t:"d",x:"PREMIÈRE GRAINE. Lou et Lina marchent dans une allée."},
+  {t:"r",q:"LINA",x:"Franchement, moi je pense à personne. Je vois pas."},
+  {t:"r",q:"LOU",x:"Moi non plus."},
+  {t:"r",q:"LINA",x:"Enfin… non, rien."},
+  {t:"r",q:"LOU",x:"Quoi ?"},
+  {t:"r",q:"LINA",x:"Non, c'est nul ce que j'allais dire."},
+  {t:"r",q:"LOU",x:"Lina."},
+  {t:"r",q:"LINA",x:"C'est juste que… Jade elle est restée un moment toute seule, quand t'es descendue avec les canettes. Mais ça veut rien dire. Franchement, oublie."},
+  {t:"d",x:"Elles continuent de marcher. Lou ne dit rien. Mais elle a entendu."},
+  {t:"d",x:"Lou s'éloigne vers la piscine. Lina reste dans l'allée. Et elle se met à fredonner, très bas, presque pour elle. Trois notes."},
+  {t:"n",x:"FÊLURE 3. On l'entend à peine, et c'est voulu. Ces trois notes reviendront deux fois : à la fin de la confrontation, et dans le tout dernier plan du film. Prends n'importe quelle petite mélodie, mais garde toujours la même."},
+  {t:"d",x:"DEUXIÈME GRAINE. Près de la table de ping-pong. Lina se baisse et ramasse quelque chose dans l'herbe. C'est l'élastique de Jade."},
+  {t:"r",q:"LINA",x:"C'est pas à Jade, ça ?"},
+  {t:"r",q:"LOU",x:"Elle l'avait enlevé tout à l'heure."},
+  {t:"r",q:"LINA",x:"Ah ouais, c'est vrai. Oui oui. C'est rien alors."},
+  {t:"d",x:"Elle le met dans sa poche quand même."},
+  {t:"n",x:"On reverra ce plan à la fin, une seconde plus longtemps. Et dans cette seconde-là, on verra que Lina ne ramasse pas l'élastique : elle le pose."},
+  {t:"d",x:"TROISIÈME GRAINE. Les trois, sur les marches. Jade est debout, les autres assises."},
+  {t:"r",q:"JADE",x:"Pourquoi vous me regardez comme ça ?"},
+  {t:"r",q:"LOU",x:"On te regarde pas."},
+  {t:"r",q:"JADE",x:"Si."},
+  {t:"r",q:"LINA",x:"Jade, personne t'accuse."},
+  {t:"r",q:"JADE",x:"J'ai pas dit qu'on m'accusait !"},
+  {t:"r",q:"LINA",x:"Voilà, personne t'accuse."},
+  {t:"d",x:"Jade ouvre la bouche et la referme. Elle vient de se faire piéger et elle ne sait même pas comment."},
+  {t:"d",x:"QUATRIÈME GRAINE, L'ALIBI."},
+  {t:"r",q:"LOU",x:"Bon. Entre quatre heures et quatre heures et demie, vous étiez où ?"},
+  {t:"r",q:"LINA",x:"Moi au ping-pong, j'ai filmé. Tiens, regarde."},
+  {t:"d",x:"Elle tend son téléphone à Lou. On voit la vidéo : Lina sert, smashe, rate, recommence. Lou rend le téléphone."},
+  {t:"r",q:"LOU",x:"OK. Jade ?"},
+  {t:"r",q:"JADE",x:"Je sais pas. J'étais là. Je marchais."},
+  {t:"r",q:"LOU",x:"T'étais où ?"},
+  {t:"r",q:"JADE",x:"Je marchais, Lou ! On savait pas qu'il allait se passer un truc, j'ai pas noté !"}
+ ]},
+
+ {id:"s6", titre:"6. Jade craque", lieu:"Extérieur. Piscine. 18 h 05.", l:[
+  {t:"d",x:"Lou tient l'élastique dans sa main. Elle le montre."},
+  {t:"r",q:"LOU",x:"Il était par terre. Devant chez mon grand-père."},
+  {t:"r",q:"JADE",x:"Et alors ? Je l'ai perdu !"},
+  {t:"r",q:"LOU",x:"Tu l'as enlevé au ping-pong. Le ping-pong c'est pas devant chez mon grand-père."},
+  {t:"d",x:"Jade la regarde. Elle comprend ce qui est en train de se passer."},
+  {t:"r",q:"JADE",x:"Attends. Tu me crois vraiment ?"},
+  {t:"d",x:"Lou ne répond pas."},
+  {t:"r",q:"JADE",x:"Lou. Tu me crois vraiment ?"},
+  {t:"r",q:"LINA",x:"Elle a pas dit ça."},
+  {t:"r",q:"JADE",x:"Toi tu te tais !"},
+  {t:"d",x:"Elle crie. Fort. Ça résonne."},
+  {t:"r",q:"JADE",x:"Je suis votre copine depuis la maternelle. La MATERNELLE. Et vous êtes là, à me regarder comme… comme…"},
+  {t:"d",x:"Elle ne finit pas. Elle attrape ses affaires et elle part."},
+  {t:"r",q:"LOU",x:"Jade…"},
+  {t:"d",x:"Jade ne se retourne pas. Lou est bouleversée. Et Lina, à côté d'elle, regarde Jade s'éloigner. Elle est parfaitement calme. Pas triste, pas gênée. Calme. Deux secondes sur son visage, et on coupe."},
+  {t:"n",x:"FÊLURE 4, la dernière et la plus forte. Tout le monde est bouleversé sauf elle. Ne rien jouer du tout : il suffit d'un visage qui ne ressent rien pendant que les autres s'écroulent."},
+  {t:"n",x:"LE PLAN DU FILM. Plan très large, fixe : la piscine entière, l'eau immobile, et tout au fond, de dos, minuscule, Jade assise toute seule. On la laisse là six secondes. Recule la caméra le plus loin possible. Ce plan ne coûte rien et c'est celui dont on se souviendra."}
+ ]},
+
+ {id:"s7", titre:"7. L'erreur", lieu:"Extérieur. Jardin. 18 h 20.", l:[
+  {t:"d",x:"Lou est assise sur un banc, les mains sur le visage. Lina s'assoit à côté d'elle et lui met la main sur l'épaule."},
+  {t:"r",q:"LINA",x:"Ça va aller."},
+  {t:"r",q:"LOU",x:"Il rentre dans quarante minutes, Lina."},
+  {t:"r",q:"LINA",x:"Elle reviendra."},
+  {t:"d",x:"Lou ne bouge pas."},
+  {t:"r",q:"LINA",x:"Elle revient toujours. Tu l'as dit toi-même."},
+  {t:"d",x:"Et elle sourit. Un tout petit sourire. Pas méchant. Juste… content. Lou relève la tête. Quelque chose ne va pas, et elle ne sait pas encore quoi."},
+  {t:"n",x:"Ce sourire est le seul moment du film où Lina se laisse aller. Il doit durer une demi-seconde. Plus long, c'est raté."},
+  {t:"d",x:"Lou se lève lentement. Elle sort son téléphone, retrouve la vidéo que Lina lui a envoyée, la regarde. Elle fronce les sourcils. Elle recule la vidéo. Elle la regarde encore."},
+  {t:"d",x:"Gros plan sur l'écran : au début de la vidéo, l'ombre de la table tombe à gauche. Elle fait défiler jusqu'à la fin : l'ombre tombe à droite."},
+  {t:"d",x:"Lou lève les yeux vers la vraie table de ping-pong, là, devant elle. Et son ombre."},
+  {t:"r",q:"LOU",x:"… C'est pas la même heure."},
+  {t:"n",x:"On filme la même scène de ping-pong deux fois dans la journée, une fois vers 14 h, une fois vers 18 h. C'est le soleil qui travaille. Au montage, on colle les deux bouts et l'ombre saute. Mêmes vêtements les deux fois."}
+ ]},
+
+ {id:"s8", titre:"8. Le retour en arrière", lieu:"18 h 30. Rien à tourner, tout se fabrique au montage.", l:[
+  {t:"n",x:"La plus belle séquence du film et la plus facile à fabriquer : on ne tourne rien de nouveau. On reprend des plans déjà tournés, et pour chacun on garde UNE SECONDE DE PLUS que la première fois. Cette seconde change tout."},
+  {t:"d",x:"Gros plan sur le visage de Lou. Elle ne bouge plus. Et dans sa tête, tout revient."},
+  {t:"d",x:"IMAGE 1. La fenêtre vue du jardin, la silhouette derrière la vitre. Cette fois on reste. La silhouette se tourne. C'est Lina."},
+  {t:"d",x:"IMAGE 2. Lina se baisse près du ping-pong. Cette fois on reste. Sa main ne ramasse pas l'élastique. Elle le pose."},
+  {t:"d",x:"IMAGE 3. « Jade elle est restée toute seule… mais ça veut rien dire. » Et on reste sur le visage de Lina après sa phrase. Elle regarde Lou. Elle attend de voir si ça a pris."},
+  {t:"d",x:"IMAGE 4. « Personne t'accuse. » Et Jade qui ouvre la bouche et la referme."},
+  {t:"d",x:"IMAGE 5. La vitrine, au tout début du film. Lina, un pas en arrière, qui regarde la statue pendant que les deux autres rient."},
+  {t:"d",x:"Retour sur Lou. Elle respire vite."},
+  {t:"n",x:"Les battements de cœur commencent lentement à l'image 1 et accélèrent jusqu'à l'image 5. Pas un mot de dialogue. La musique monte avec eux et s'arrête NET à la fin de l'image 5."}
+ ]},
+
+ {id:"s9", titre:"9. La confrontation", lieu:"Intérieur. Devant la vitrine vide. 18 h 45.", l:[
+  {t:"d",x:"Lou entre. Lina est déjà là, debout près de la fenêtre. Jade arrive derrière, en retrait, les bras croisés. Silence complet. Aucun son. Pas de musique."},
+  {t:"r",q:"LOU",x:"C'est toi."},
+  {t:"r",q:"LINA",x:"Quoi ?"},
+  {t:"r",q:"LOU",x:"C'est toi."},
+  {t:"r",q:"LINA",x:"Lou, qu'est-ce que tu racontes."},
+  {t:"d",x:"Lou lève son téléphone et montre l'écran."},
+  {t:"r",q:"LOU",x:"Au début de ta vidéo, l'ombre est à gauche. À la fin, elle est à droite. T'as filmé à deux moments différents et t'as collé les deux."},
+  {t:"r",q:"LOU",x:"Il te manque vingt minutes, Lina."},
+  {t:"d",x:"Lina ne dit rien. Elle regarde Lou. Elle regarde Jade. Elle regarde la vitrine vide. Et elle rit. Un petit rire dans le nez d'abord, comme si quelqu'un venait de raconter une blague. Puis plus fort. Elle se laisse glisser par terre, le dos contre le mur, et elle rit encore."},
+  {t:"r",q:"LINA",x:"C'est maintenant."},
+  {t:"r",q:"LOU",x:"Quoi ?"},
+  {t:"r",q:"LINA",x:"C'est maintenant que tu me regardes."},
+  {t:"d",x:"Elle s'arrête de rire d'un coup. Plus rien du tout sur son visage."},
+  {t:"r",q:"LINA",x:"Six ans que j'attends ça."},
+  {t:"d",x:"Elle se relève, tranquillement. Et quand elle recommence à parler, c'est doux. Presque tendre. C'est ça qui est insupportable."},
+  {t:"r",q:"LINA",x:"Tu veux que je te dise le pire ? T'as rien fait. T'as jamais rien fait. T'as juste… tout."},
+  {t:"r",q:"LINA",x:"Ton grand-père qui t'adore. Jade qui rit à tout ce que tu dis, même quand c'est pas drôle. Tout le monde qui se tourne quand tu arrives quelque part. Et moi je suis derrière. Depuis six ans. À vous regarder."},
+  {t:"d",x:"Elle sourit à Lou. Un vrai sourire gentil, celui qu'elle fait depuis le début du film."},
+  {t:"r",q:"LINA",x:"Tu sais combien de fois je t'ai vue être heureuse ? Tous les jours, Lou. Tous les jours."},
+  {t:"d",x:"Lou n'arrive presque plus à parler."},
+  {t:"r",q:"LOU",x:"… Pourquoi la statue ?"},
+  {t:"d",x:"Lina penche la tête sur le côté. Elle attend la suite, poliment."},
+  {t:"r",q:"LOU",x:"Il y a plein de trucs dans cet appartement. Pourquoi elle ?"},
+  {t:"d",x:"Et là, Lina répond, très calmement. C'est le moment le plus violent du film."},
+  {t:"r",q:"LINA",x:"Parce que c'est toi qui me l'as dit."},
+  {t:"d",x:"Silence."},
+  {t:"r",q:"LINA",x:"Sur le banc. « C'est ce qu'il a de plus précieux au monde. » Tu me l'as dit à moi. Rien qu'à moi."},
+  {t:"d",x:"Et sa voix change. Elle monte. Ça part d'un coup, sans prévenir."},
+  {t:"r",q:"LINA",x:"Et t'étais tellement CONTENTE de me le dire ! Tellement contente ! Tu m'as regardée comme si j'étais ton amie !"},
+  {t:"d",x:"Elle hurle. Jade recule contre la porte."},
+  {t:"r",q:"LINA",x:"JE T'AI JAMAIS AIMÉE, LOU."},
+  {t:"d",x:"Un blanc terrible."},
+  {t:"r",q:"LINA",x:"Jamais. Pas une seule fois."},
+  {t:"d",x:"Et elle pleure. D'un coup, sans transition. Elle s'effondre, elle n'arrive plus à respirer, elle sanglote comme une enfant de six ans. Lou ne bouge pas. Jade ne bouge pas. Et puis, en trois secondes, ça s'arrête. Lina s'essuie le visage avec sa manche, elle respire un coup, elle se redresse, elle remet ses cheveux en place."},
+  {t:"r",q:"LINA",x:"Elle est dans les feuilles. À côté des poubelles, en bas. Sous le tas."},
+  {t:"r",q:"LINA",x:"Vous feriez bien de vous dépêcher. Il est presque sept heures."},
+  {t:"d",x:"Lou et Jade sortent en courant. On entend leurs pas dans l'escalier. Lina reste seule au milieu de la pièce. Elle regarde la vitrine vide. Et elle appelle vers la porte ouverte, gentiment, comme on propose un service."},
+  {t:"r",q:"LINA",x:"Vous voulez que je vous aide à chercher ?"},
+  {t:"d",x:"Personne ne répond. Elle sourit. Et elle se met à fredonner. Trois notes. Toujours les mêmes."},
+  {t:"n",x:"LA SCÈNE DE SA VIE. Elle se joue comme dans un film à suspense : on change de personne toutes les dix secondes. Elle rit, elle redevient glaciale, elle parle doucement comme à une amie, elle hurle, elle s'effondre, elle redevient polie. Et à aucun moment elle ne prévient."},
+  {t:"n",x:"Le secret, ce n'est pas de crier plus fort : c'est que les passages DOUX soient aussi inquiétants que les cris. « Tu veux que je te dise le pire ? », dit avec un sourire, doit faire plus peur que les hurlements. Et « Vous voulez que je vous aide à chercher ? » se dit exactement du même ton que « tu veux un bonbon ? ». C'est la phrase qui va faire se retourner les gens dans la salle."},
+  {t:"n",x:"Les battements de cœur, revenus pendant la crise, s'arrêtent net à l'instant où elle s'essuie le visage. Silence total ensuite. Et sur les trois notes fredonnées, rien d'autre. Rien du tout."}
+ ]},
+
+ {id:"s10", titre:"10. Les feuilles", lieu:"Extérieur. Coin des poubelles. 18 h 52.", l:[
+  {t:"d",x:"Lou court. Jade court derrière elle. Le tas de feuilles mortes, à côté des conteneurs. Lou tombe à genoux et plonge les mains dedans. Elle fouille. Elle jette des feuilles partout. Jade se met à genoux à côté d'elle et fouille aussi."},
+  {t:"d",x:"Et la main de Lou s'arrête. Elle sort la statue. Le guerrier, couvert de terre et de feuilles mouillées."},
+  {t:"d",x:"Lou le serre contre elle. Elle ne dit rien. Elle pleure sans bruit. Jade pose sa main sur son dos. C'est la première fois du film qu'elles se touchent."},
+  {t:"n",x:"Le plan à réussir absolument : la tête du guerrier qui sort des feuilles. On filme très près, au ras du sol. On peut le refaire dix fois, ça ne coûte rien. La musique du tout début revient ici, à la guitare, pour la première fois depuis neuf minutes."}
+ ]},
+
+ {id:"s11", titre:"11. 18 h 58", lieu:"Intérieur. Appartement.", l:[
+  {t:"d",x:"Lou essuie la statue avec la manche de son pull. Longuement. Soigneusement. Elle la repose dans la vitrine, exactement à sa place. Elle referme. On entend le petit claquement du début."},
+  {t:"d",x:"Et on entend une clé dans la serrure de l'entrée. Hors champ."},
+  {t:"r",q:"VOIX",x:"Les filles ? Vous êtes là ?"},
+  {t:"d",x:"Lou regarde Jade. Jade regarde Lou."},
+  {t:"r",q:"LOU",x:"Oui, papi. On est là."},
+  {t:"d",x:"Elles ne disent rien d'autre."},
+  {t:"n",x:"On ne voit jamais le grand-père, on entend seulement sa voix. C'est volontaire : aucun adulte à faire jouer, et c'est plus fort, il ne saura jamais. La voix peut être enregistrée par n'importe qui, séparément, et ajoutée au montage."}
+ ]},
+
+ {id:"s12", titre:"12. La confidence, en entier", lieu:"Flash-back. Le banc, dans le jardin.", l:[
+  {t:"n",x:"On revient à la scène de la séquence 2. Même banc, même lumière, même cadre. Mais cette fois, on ne coupe pas."},
+  {t:"r",q:"LOU",x:"Tu sais, la statue, là… c'est ce qu'il a de plus précieux au monde."},
+  {t:"r",q:"LINA",x:"Plus que tout ?"},
+  {t:"r",q:"LOU",x:"Plus que tout. C'est ma grand-mère qui la lui a offerte. Avant."},
+  {t:"r",q:"LOU",x:"Il dit que tant qu'elle est là, elle est un peu là aussi."},
+  {t:"d",x:"Lou regarde ailleurs, elle sourit, elle pense à autre chose. Et la caméra reste sur Lina. Lina ne dit rien. Elle regarde Lou. Longtemps. Et on comprend tout."},
+  {t:"n",x:"Le plan le plus important du film. Quatre secondes, aucun dialogue. Celle qui joue Lina ne doit rien faire du tout : pas de sourire, pas de regard méchant. Juste regarder. C'est celui qui regarde le film qui fera le travail."}
+ ]},
+
+ {id:"s13", titre:"13. Le dernier plan", lieu:"Extérieur. Jardin et ping-pong. Le soir.", l:[
+  {t:"d",x:"Lumière de fin de journée. Lou et Jade marchent côte à côte dans une allée. Elles ne parlent pas. Elles sont ensemble."},
+  {t:"d",x:"Plus loin, à la table de ping-pong, Lina est seule. Elle a relevé la moitié de la table et elle joue contre elle-même. La balle fait son bruit régulier. Pok. Pok. Pok."},
+  {t:"d",x:"Lou et Jade passent derrière elle. Lina se retourne."},
+  {t:"r",q:"LINA",x:"Lou ?"},
+  {t:"d",x:"Lou ne s'arrête pas. Elle ne se retourne pas. Elle continue de marcher."},
+  {t:"d",x:"Lina reste là, la raquette à la main. Elle se remet à jouer. Pok. Pok. Et elle fredonne. Les trois mêmes notes. Elle rate. La balle roule par terre, et s'arrête. Noir."},
+  {t:"n",x:"Aucune musique. Juste la balle et les trois notes. La musique n'entre qu'au noir, sur le générique. C'est la troisième et dernière fois qu'on entend ces notes, et c'est là qu'elles font le plus peur."}
+ ]}
+];
+
+/* ===================== LA LISTE DES PLANS ===================== */
+const PLANS = [
+ ["Le guerrier en gros plan derrière la vitre, la caméra recule","Appartement · séq. 1"],
+ ["Les trois devant la vitrine, Lou raconte la légende","Appartement · séq. 1"],
+ ["Lina seule devant la vitrine, un pas en arrière","Appartement · séq. 1"],
+ ["Jade et Lou jouent au ping-pong, l'ombre bien visible","Ping-pong · DÉBUT d'après-midi"],
+ ["Lina sur le banc, « moi je joue après ? »","Ping-pong · séq. 2"],
+ ["Les trois pieds dans l'eau au bord de la piscine","Piscine · séq. 2"],
+ ["Lina filme ses smashs, vue de loin, ombre à gauche","Ping-pong · 14 h"],
+ ["Lina filme ses smashs, vue de loin, ombre à droite","Ping-pong · 18 h, MÊMES VÊTEMENTS"],
+ ["L'écran du téléphone de Lina, sa vidéo à elle","N'importe où · séq. 2"],
+ ["Lou monte chercher les canettes, la vitrine au fond","Appartement · séq. 2"],
+ ["Jade pose son élastique sur la table","Ping-pong · séq. 2"],
+ ["La fenêtre vue du jardin, la silhouette, version COURTE","Jardin · séq. 2"],
+ ["La même fenêtre, version LONGUE, on voit que c'est Lina","Jardin · pour la séq. 8"],
+ ["La confidence sur le banc, version COURTE","Jardin · séq. 2"],
+ ["La confidence sur le banc, version LONGUE sur Lina","Jardin · pour la séq. 12"],
+ ["La vitrine vide, plan fixe de face, trois secondes","Appartement · séq. 3"],
+ ["La découverte, les trois qui entrent","Appartement · séq. 3"],
+ ["Lou fouille derrière et sous le meuble","Appartement · séq. 3"],
+ ["L'enquête autour de la table, les carnets","Appartement · séq. 4"],
+ ["Les clés sur le crochet de la cuisine","Appartement · séq. 4"],
+ ["« Donc c'est l'une de nous », serré sur chacune des trois","Appartement · séq. 4"],
+ ["Lou et Lina marchent dans l'allée, la première graine","Jardin · séq. 5"],
+ ["Lina et l'élastique, version COURTE","Ping-pong · séq. 5"],
+ ["Lina et l'élastique, version LONGUE, elle le pose","Ping-pong · pour la séq. 8"],
+ ["Les trois sur les marches, « personne t'accuse »","Jardin · séq. 5"],
+ ["L'alibi, Lina tend son téléphone","Jardin · séq. 5"],
+ ["L'accusation de Jade au bord de la piscine","Piscine · séq. 6"],
+ ["Jade seule, de dos, plan TRÈS large","Piscine · séq. 6 · le plan du film"],
+ ["Lou et Lina sur le banc, le petit sourire","Jardin · séq. 7"],
+ ["Lou regarde la vidéo sur son téléphone","Jardin · séq. 7"],
+ ["Gros plan sur l'ombre de la table, longue, le soir","Ping-pong · séq. 7"],
+ ["La confrontation devant la vitrine vide","Appartement · séq. 9"],
+ ["La crise de Lina, plan serré, sans coupe","Appartement · séq. 9"],
+ ["Lou et Jade qui courent vers les poubelles","Extérieur · séq. 10"],
+ ["Les mains qui fouillent les feuilles","Feuilles · séq. 10"],
+ ["La tête du guerrier qui sort des feuilles, au ras du sol","Feuilles · séq. 10"],
+ ["Lou essuie la statue et la repose dans la vitrine","Appartement · séq. 11"],
+ ["Lou et Jade marchent ensemble dans l'allée","Jardin · séq. 13"],
+ ["Lina seule au ping-pong, elle joue contre la table relevée","Ping-pong · séq. 13"],
+ ["La balle qui roule par terre et s'arrête","Ping-pong · séq. 13"],
+ ["COUPE · l'eau de la piscine, immobile","à faire toute seule"],
+ ["COUPE · le filet du ping-pong de très près","à faire toute seule"],
+ ["COUPE · des pieds qui marchent dans le gravier","à faire toute seule"],
+ ["COUPE · l'allée du jardin, vide","à faire toute seule"],
+ ["COUPE · les buissons avec le vent dedans","à faire toute seule"],
+ ["COUPE · la vitrine fermée, de biais, avec un reflet","à faire toute seule"],
+ ["COUPE · le rideau de la baie vitrée qui bouge","à faire toute seule"],
+ ["COUPE · un banc vide","à faire toute seule"],
+ ["COUPE · le tas de feuilles, avant et après","à faire toute seule"],
+ ["COUPE · un carnet fermé posé sur une table","à faire toute seule"],
+ ["COUPE · le ciel entre les immeubles","à faire toute seule"],
+ ["COUPE · une balle de ping-pong posée par terre","à faire toute seule"]
+];
+
+/* ===================== NAVIGATION ===================== */
+const onglets = Array.from(document.querySelectorAll(".onglet"));
+onglets.forEach(function(o){
+  o.addEventListener("click", function(){
+    onglets.forEach(function(a){ a.setAttribute("aria-selected", String(a === o)); });
+    ["histoire","repeter","filmer","plans","scenario"].forEach(function(v){
+      document.getElementById("vue-" + v).hidden = (v !== o.dataset.vue);
+    });
+    window.scrollTo(0,0);
+    if (o.dataset.vue !== "repeter") stop();
+  });
+});
+
+/* ===================== LE SCÉNARIO ===================== */
+(function(){
+  const cible = document.getElementById("scenario-complet");
+  let html = "";
+  SCENES.forEach(function(s){
+    html += '<article class="seq"><p class="seq-num">Séquence</p><h3>' + s.titre + "</h3>";
+    html += '<p class="seq-lieu">' + s.lieu + "</p>";
+    s.l.forEach(function(e){
+      if (e.t === "d") html += '<p class="dida">' + e.x + "</p>";
+      else if (e.t === "n") html += '<div class="note"><b>Consigne de tournage.</b> ' + e.x + "</div>";
+      else html += '<p class="repl"><span class="q">' + e.q + '</span><span class="t">' + e.x + "</span></p>";
+    });
+    html += "</article>";
+  });
+  cible.innerHTML = html;
+})();
+
+/* ===================== LA LISTE DES PLANS ===================== */
+(function(){
+  const cible = document.getElementById("liste-plans");
+  const compteur = document.getElementById("compteur");
+  let etat = {};
+  try { etat = JSON.parse(localStorage.getItem("guerrier-plans") || "{}") || {}; } catch (e) { etat = {}; }
+
+  function majCompteur(){
+    let n = 0;
+    PLANS.forEach(function(p,i){ if (etat["p"+i]) n++; });
+    compteur.textContent = n + (n > 1 ? " plans tournés" : " plan tourné") + " sur " + PLANS.length;
+  }
+
+  PLANS.forEach(function(p,i){
+    const b = document.createElement("button");
+    b.className = "case";
+    b.type = "button";
+    b.setAttribute("aria-pressed", etat["p"+i] ? "true" : "false");
+    b.innerHTML = '<span class="coche" aria-hidden="true"></span><span class="libelle">' + p[0] + '<span class="ou">' + p[1] + "</span></span>";
+    b.addEventListener("click", function(){
+      const on = b.getAttribute("aria-pressed") === "true";
+      b.setAttribute("aria-pressed", on ? "false" : "true");
+      etat["p"+i] = !on;
+      try { localStorage.setItem("guerrier-plans", JSON.stringify(etat)); } catch (e) {}
+      majCompteur();
+    });
+    cible.appendChild(b);
+  });
+  majCompteur();
+})();
+
+/* ===================== LE RÉPÉTITEUR ===================== */
+const synth = window.speechSynthesis || null;
+let monRole = null, maScene = null, curseur = 0, enCours = false, cacher = false;
+let voixFR = [];
+
+const boite = document.getElementById("scene-boite");
+const barre = document.getElementById("jauge-barre");
+const btnGo = document.getElementById("btn-go");
+const btnSuiv = document.getElementById("btn-suiv");
+const btnCache = document.getElementById("btn-cache");
+const btnStop = document.getElementById("btn-stop");
+const avis = document.getElementById("avis-voix");
+
+function chargerVoix(){
+  if (!synth) return;
+  const v = synth.getVoices() || [];
+  voixFR = v.filter(function(x){ return /^fr/i.test(x.lang); });
+  if (!voixFR.length) voixFR = v.slice(0,3);
+}
+if (synth){
+  chargerVoix();
+  synth.addEventListener && synth.addEventListener("voiceschanged", chargerVoix);
+  avis.textContent = "Les voix sont celles de ton téléphone. Elles sont un peu robots, c'est normal : elles servent à donner la réplique, pas à jouer.";
+} else {
+  avis.textContent = "Ce navigateur ne sait pas lire à voix haute. Le texte s'affichera quand même, ligne par ligne.";
+}
+
+/* réglages de voix par personnage, pour qu'on les distingue */
+const TIMBRE = {
+  LOU:  {pitch:1.05, rate:1.0,  i:0},
+  JADE: {pitch:1.25, rate:1.08, i:1},
+  LINA: {pitch:0.92, rate:0.95, i:2},
+  VOIX: {pitch:0.7,  rate:0.9,  i:0}
+};
+
+(function remplirChoix(){
+  const cr = document.getElementById("choix-role");
+  ROLES.forEach(function(r){
+    const b = document.createElement("button");
+    b.className = "puce"; b.type = "button"; b.textContent = r;
+    b.setAttribute("aria-pressed","false");
+    b.addEventListener("click", function(){
+      monRole = r;
+      cr.querySelectorAll(".puce").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+      verifPret();
+    });
+    cr.appendChild(b);
+  });
+
+  const cs = document.getElementById("choix-scene");
+  SCENES.forEach(function(s){
+    if (!s.l.some(function(e){ return e.t === "r"; })) return;
+    const b = document.createElement("button");
+    b.className = "puce"; b.type = "button"; b.textContent = s.titre;
+    b.setAttribute("aria-pressed","false");
+    b.addEventListener("click", function(){
+      maScene = s;
+      cs.querySelectorAll(".puce").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+      verifPret();
+    });
+    cs.appendChild(b);
+  });
+})();
+
+function verifPret(){ btnGo.disabled = !(monRole && maScene); }
+
+function dessiner(html){ boite.innerHTML = html; }
+
+function echap(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function avance(){
+  if (!enCours || !maScene) return;
+  if (curseur >= maScene.l.length){
+    dessiner('<p class="scene-vide">Scène terminée. Bravo.<br>Refais-la, elle sera meilleure.</p>');
+    barre.style.width = "100%";
+    enCours = false; btnSuiv.disabled = true; btnGo.disabled = false; btnGo.textContent = "Recommencer";
+    return;
+  }
+  barre.style.width = Math.round(curseur / maScene.l.length * 100) + "%";
+  const e = maScene.l[curseur];
+
+  if (e.t === "n"){ curseur++; avance(); return; }
+
+  if (e.t === "d"){
+    dessiner('<p class="scene-didascalie">' + echap(e.x) + "</p>");
+    curseur++;
+    setTimeout(avance, Math.min(6000, 1200 + e.x.length * 22));
+    return;
+  }
+
+  const moi = (e.q === monRole);
+  let html = '<span class="scene-qui' + (moi ? " moi" : "") + '">' + echap(e.q) + (moi ? " · à toi" : "") + "</span>";
+  html += '<p class="scene-texte' + (moi && cacher ? " cachee" : "") + '">' + echap(e.x) + "</p>";
+  if (moi) html += '<span class="mon-tour">Dis ta réplique, puis appuie</span>';
+  dessiner(html);
+
+  if (moi){
+    btnSuiv.disabled = false;
+    return;
+  }
+
+  btnSuiv.disabled = true;
+  curseur++;
+  parler(e.q, e.x, avance);
+}
+
+function parler(qui, texte, apres){
+  if (!synth){ setTimeout(apres, Math.min(7000, 900 + texte.length * 55)); return; }
+  try {
+    const u = new SpeechSynthesisUtterance(texte);
+    const t = TIMBRE[qui] || TIMBRE.LOU;
+    u.lang = "fr-FR";
+    u.pitch = t.pitch;
+    u.rate = t.rate;
+    if (voixFR.length) u.voice = voixFR[t.i % voixFR.length];
+    let fini = false;
+    u.onend = function(){ if (!fini){ fini = true; setTimeout(apres, 260); } };
+    u.onerror = function(){ if (!fini){ fini = true; setTimeout(apres, 260); } };
+    synth.speak(u);
+    /* filet de sécurité si onend ne part jamais (ça arrive sur mobile) */
+    setTimeout(function(){ if (!fini){ fini = true; apres(); } }, 1500 + texte.length * 95);
+  } catch (err){
+    setTimeout(apres, 1200);
+  }
+}
+
+btnGo.addEventListener("click", function(){
+  if (!monRole || !maScene) return;
+  if (synth) { try { synth.cancel(); } catch(e){} }
+  curseur = 0; enCours = true;
+  btnGo.disabled = true; btnGo.textContent = "En cours…";
+  avance();
+});
+
+btnSuiv.addEventListener("click", function(){
+  if (!enCours) return;
+  curseur++;
+  btnSuiv.disabled = true;
+  avance();
+});
+
+btnCache.addEventListener("click", function(){
+  cacher = !cacher;
+  btnCache.setAttribute("aria-pressed", String(cacher));
+  btnCache.textContent = cacher ? "Montrer mes répliques" : "Cacher mes répliques";
+});
+
+function stop(){
+  enCours = false;
+  if (synth) { try { synth.cancel(); } catch(e){} }
+  btnSuiv.disabled = true;
+  btnGo.textContent = "Commencer";
+  verifPret();
+  barre.style.width = "0";
+  dessiner('<p class="scene-vide">Choisis ton rôle et une scène, puis appuie sur Commencer.</p>');
+}
+btnStop.addEventListener("click", stop);
+window.addEventListener("pagehide", function(){ if (synth) { try { synth.cancel(); } catch(e){} } });
+</script>
